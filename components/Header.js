@@ -1,17 +1,17 @@
 import Link from "next/link";
 
-const linkStyle = {
-  marginRight: 15
+const wrapStyle = {
+  height: 65px;
+  margin: 0 192px;
+  display: flex;
+  alignItems: center;
+  opacity: 0.8;
 };
 
 const Header = () => (
-  <div>
-    <Link href="/">
-      <a style={linkStyle}> Home </a>
-    </Link>
-    <Link href="/about">
-      <a style={linkStyle}> About </a>
-    </Link>
+  <div style={wrapStyle}>
+    <p>Hexon </p>
+    <p>放风筝的小小马</p>
   </div>
 );
 
