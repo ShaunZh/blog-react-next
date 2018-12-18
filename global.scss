@@ -1,0 +1,99 @@
+$fs-small: 12px;
+$fs-middle: 14px;
+$fs-normal: 16px;
+
+html,
+body {
+  color: #444;
+}
+article,
+aside,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display: block;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    sans-serif;
+  line-height: 1;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.fs-small {
+  font-size: $fs-small;
+}
+
+.fs-middle {
+  font-size: $fs-middle;
+}
+
+.fs-normal {
+  font-size: $fs-normal;
+}
+
+.bk-normal {
+  background: rgba(221, 221, 221, 0.1);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-item-start {
+  align-items: flex-start;
+}
+
+.align-item-end {
+  align-items: flex-end;
+}
+
+.fs-12 {
+  font-size: $fs-small;
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+//== Text
+.text-inline {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
