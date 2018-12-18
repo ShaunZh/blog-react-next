@@ -1,19 +1,33 @@
-// 标签页面
-import fetch from 'isomorphic-unfetch';
-import Layout from "../components/Layout";
+/*
+ * @Author: Hexon
+ * @Date: 2018-12-04 21:51:42
+ * @LastEditTime: 2018-12-19 00:09:51
+ * @Description: 首页
+ */
+import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 
-export default const Tag = props => (
-  <Layout>
-    <h1>{props.url.query.title}</h1>
-    <p>This is the blog post content.</p>
-  </Layout>
-);
+import ArticlesList from "../components/ArticlesList";
+import "../global.scss";
 
-Tag.getInitialProps = async ({ req }) => {
-  const res = await fetch('');
-  const data = res.json();
+const Tag = props => <ArticlesList articlesList={props.articlesList} />;
 
-  return {
-    tag: data
+Tag.getInitialProps = async function(props) {
+  try {
+    const tagsId = props.query.id;
+    const res = await fetch(
+      `https://www.easy-mock.com/mock/5a6ad0ef2d33bf493f88235d/blog_copy/tagsList/${tagsId}`
+    );
+    const data = await res.json();
+    if (data.status !== 200) {
+      throw new Error(data.message);
+    }
+    return {
+      articlesList: data.data.articlesList
+    };
+  } catch (e) {
+    console.error(e.message);
   }
-}
+};
+
+export default Tag;
