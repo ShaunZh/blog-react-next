@@ -10,12 +10,21 @@ const Page = ({ stars }) => {
 };
 
 Page.getInitialProps = async ({ req }) => {
-  // 获取文章详情
-  const res = await fetch("https://api.github.com/repos/zeit/next.js");
-  const json = await res.json();
-  return {
-    stars: json.stargazers_count
-  };
+  try {
+    const articleId = props.query.id;
+    const res = await fetch(
+      `https://www.easy-mock.com/mock/5a6ad0ef2d33bf493f88235d/blog_copy/articleDetail/${articleId}`
+    );
+    const data = await res.json();
+    if (data.status !== 200) {
+      throw new Error(data.message);
+    }
+    return {
+      articleDetail: data.data
+    };
+  } catch (e) {
+    console.error(e.message);
+  }
 };
 
 export default Page;
