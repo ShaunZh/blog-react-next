@@ -1,7 +1,15 @@
-// 首页 
+/*
+ * @Author: Hexon
+ * @Date: 2018-12-04 21:51:42
+ * @LastEditTime: 2018-12-18 00:37:40
+ * @Description: 首页
+ */
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
-import Layout from "../components/Layout";
+import FullLayout from "../components/FullLayout";
+
+import ArticlesList from "../components/ArticlesList";
+import "../global.scss"
 
 const PostLink = props => (
   <li>
@@ -12,36 +20,25 @@ const PostLink = props => (
 );
 
 const Index = props => (
-  <Layout>
-    <h1>My blog</h1>
-    <ul>
-      {props.shows.map(({ show }) => (
-        <li key={show.id}>
-          <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </Layout>
+  <ArticlesList articlesList={props.articlesList} />
 );
 
 Index.getInitialProps = async function() {
-  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
-  const data = await res.json();
-  return {
-    shows: data
-  };
+  try {
+    const res = await fetch(
+      "https://www.easy-mock.com/mock/5a6ad0ef2d33bf493f88235d/blog_copy/initData"
+    );
+    const data = await res.json();
+    if (data.status !== 200) {
+      throw new Error(data.message);
+    }
+    // console.log('articlesList', data.data.latestArticlesList)
+    return {
+      articlesList: data.data.latestArticlesList
+    };
+  } catch (e) {
+    console.error(e.message);
+  }
 };
 
 export default Index;
-// export default () => (
-//   <Layout>
-//     <h1>My blog</h1>
-//     <ul>
-//       <PostLink title="Hello blog" id="hello-nextjs" />
-//       <PostLink title="first blog" id="first-blogjs" />
-//       <PostLink title="second blog" id="second-blogjs" />
-//     </ul>
-//   </Layout>
-// );
